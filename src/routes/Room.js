@@ -255,7 +255,25 @@ const Room = (props) => {
   };
 
   const sendMsg = () => {
-    if (txt !== "") {
+    if (txt.trim() !== "") {
+      setmsgs((msgs) => [
+        ...msgs,
+        {
+          by: "You",
+          content: txt,
+        },
+      ]);
+
+      socketRef.current.emit("sending message", {
+        by: "User",
+        content: txt,
+      });
+
+      settxt("");
+    }
+  };
+  const sendMsg1 = (e) => {
+    if (txt.trim() !== "" && e.key === 'Enter') {
       setmsgs((msgs) => [
         ...msgs,
         {
@@ -306,7 +324,7 @@ const Room = (props) => {
             })}
             <div ref={msgEndRef} />
           </div>
-          <div className="chatbsend">
+          <div className="chatbsend" onKeyDown={sendMsg1}>
             <textarea
               placeholder="Send a Message to everyone"
               value={txt}
