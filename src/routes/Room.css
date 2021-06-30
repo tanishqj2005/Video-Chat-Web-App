@@ -1,0 +1,116 @@
+.controls {
+  height: 10vh;
+  background-color: #202124;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.one {
+  height: 93%;
+  width: 100%;
+}
+
+.two {
+  height: 100%;
+  width: 48%;
+  margin: 15px;
+}
+
+.icon {
+  padding: 10px;
+  background-color: #3f3953;
+  border-radius: 30px;
+  margin-left: 15px;
+  margin-right: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.videos {
+  flex: 3.5;
+  height: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.chatbox {
+  flex: 1;
+  height: 90%;
+  background-color: white;
+  margin: 25px;
+  border-radius: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.chatbtitle {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 13px;
+  font-size: 20px;
+}
+
+.chatbinfo {
+  margin: 10px;
+  margin-top: 20px;
+  padding: 8px;
+  font-size: 12px;
+  text-align: center;
+  background-color: #f1f3f4;
+  border-radius: 10px;
+}
+
+.allmessages {
+  height: 65%;
+  margin: 10px;
+  margin-top: 15px;
+  overflow-y: scroll;
+  width: 90%;
+}
+
+.allmessages::-webkit-scrollbar {
+  display: none;
+}
+
+.chatbsend {
+  width: 90%;
+  margin: 15px;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f1f3f4;
+}
+
+.chatbsend > textarea {
+  width: 80%;
+  border: none;
+  background-color: transparent;
+  justify-content: center;
+  align-items: center;
+  resize: none;
+  outline: none;
+  display: flex;
+}
+
+textarea :focus,
+input:focus {
+  outline: none;
+  border: none;
+}
+
+.amsg{
+  width:90%;
+  margin: 10px;
+  overflow-anchor: bottom;
+}
