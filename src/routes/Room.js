@@ -64,11 +64,25 @@ const Room = (props) => {
   const [msgs, setmsgs] = useState([]);
 
   useEffect(() => {
+    if (!props.location.state) {
+      window.location.href = `/pre/${roomID}`;
+    }
+
     socketRef.current = io.connect("/");
     navigator.mediaDevices
       .getUserMedia({ video: videoConstraints, audio: true })
       .then((stream) => {
         userVideo.current.srcObject = stream;
+
+        if (!props.location.state.mic) {
+          userVideo.current.srcObject.getAudioTracks()[0].enabled = false;
+          setMic(false);
+        }
+        if (!props.location.state.cam) {
+          userVideo.current.srcObject.getVideoTracks()[0].enabled = false;
+          setCam(false);
+        }
+
         socketRef.current.emit("join room", roomID);
         socketRef.current.on("all users", (users) => {
           const peers = [];
@@ -273,7 +287,7 @@ const Room = (props) => {
     }
   };
   const sendMsg1 = (e) => {
-    if (txt.trim() !== "" && e.key === 'Enter') {
+    if (txt.trim() !== "" && e.key === "Enter") {
       setmsgs((msgs) => [
         ...msgs,
         {

@@ -5,13 +5,13 @@ import "./CreateRoom.css";
 const CreateRoom = (props) => {
   function create() {
     const id = uuid();
-    props.history.push(`/room/${id}`);
+    props.history.push(`/pre/${id}`);
   }
 
   return (
-    <div className="container">
-      <div className="taskbar">
-        <div className="logo">
+    <div className="container1">
+      <div className="taskbar1">
+        <div className="logo1">
           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2zfAREgkmbvcbWq8CfWYnRK1TIQ2PD3QKcg&usqp=CAU" />
         </div>
         <p className="title">

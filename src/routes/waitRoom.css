@@ -1,0 +1,115 @@
+.container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  background-color: white;
+  flex-direction: row;
+}
+
+.taskbar {
+  height: 15vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  margin-left: 5%;
+}
+
+.title {
+  font-size: 38px;
+  font-family: cursive;
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.title > span {
+  color: gray;
+}
+
+.logo {
+  height: 85%;
+  width: 10%;
+}
+.logo img {
+  height: 100%;
+  width: 100%;
+}
+
+.one {
+  height: 100%;
+  width: 100%;
+}
+
+.videocontbox {
+  display: flex;
+  height: 100%;
+  flex: 2.3;
+  flex-direction: column;
+}
+
+.videobox {
+  height: 75%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-right: 10%;
+  padding-left: 10%;
+}
+
+.joinbox {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.joinbox > p{
+    font-size: 30px;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: auto;
+}
+
+.contr {
+  height: 20%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.ic {
+  border-radius: 30px;
+  cursor: pointer;
+  padding: 1%;
+  background-color: black;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.btnBox{
+    height: 20%;
+    width: 80%;
+    margin-left:5%;
+    margin-right: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.joinbtn{
+    background-color: #1a73e8;
+    border: 2px solid black;
+    padding: 15px;
+    color: white;
+    border-radius: 12px;
+    cursor: pointer;
+}
