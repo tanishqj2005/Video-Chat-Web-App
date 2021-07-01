@@ -1,12 +1,22 @@
 import React from "react";
 import { v1 as uuid } from "uuid";
 import "./CreateRoom.css";
+import { GoogleLogin } from "react-google-login";
 
 const CreateRoom = (props) => {
-  function create() {
+  function create(name, img) {
     const id = uuid();
-    props.history.push(`/pre/${id}`);
+    props.history.push(`/pre/${id}`, {
+      name,
+      img,
+    });
   }
+
+  const responseGoogle = (response) => {
+    const name = response.Ys.Ve;
+    const img = response.profileObj.imageUrl;
+    create(name, img);
+  };
 
   return (
     <div className="container1">
@@ -33,8 +43,13 @@ const CreateRoom = (props) => {
         </div>
       </div>
       <div className="btnCont">
-        <div className="btn" onClick={create}>
-          Create a Room Instantly
+        <div className="btn">
+          <GoogleLogin
+            clientId="473889804939-kogm6iao0p44dedeo650vs98qavh3dmg.apps.googleusercontent.com"
+            onSuccess={responseGoogle}
+            isSignedIn={false}
+            buttonText="Create a Room Instantly"
+          />
         </div>
       </div>
     </div>
