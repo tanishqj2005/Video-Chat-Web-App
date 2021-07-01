@@ -18,6 +18,11 @@ const CreateRoom = (props) => {
     create(name, img);
   };
 
+  const responseGoogle1 = (response) => {
+    console.log(response);
+    create("User", "https://image.flaticon.com/icons/png/512/149/149071.png");
+  };
+
   return (
     <div className="container1">
       <div className="taskbar1">
@@ -47,6 +52,7 @@ const CreateRoom = (props) => {
           <GoogleLogin
             clientId="473889804939-kogm6iao0p44dedeo650vs98qavh3dmg.apps.googleusercontent.com"
             onSuccess={responseGoogle}
+            onFailure={responseGoogle1}
             isSignedIn={false}
             buttonText="Create a Room Instantly"
           />

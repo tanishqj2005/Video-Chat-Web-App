@@ -16,6 +16,8 @@ const videoConstraints = {
 const Room = (props) => {
   const userVideo = useRef();
   const roomID = props.match.params.roomID;
+  const username = props.location.state.name;
+  const userimg = props.location.state.img;
   const [cam, setCam] = useState(true);
   const [mic, setMic] = useState(true);
 
@@ -105,6 +107,10 @@ const Room = (props) => {
           <p className="title" onClick={toHome}>
             Ezy <span>Chat</span>
           </p>
+          <div className="userDetails">
+            <p className='username'>{username}</p>
+            <div className='userimg'><img src={userimg}/></div>
+          </div>
         </div>
         <div className="videobox">
           <video ref={userVideo} autoPlay playsInline muted className="one" />
