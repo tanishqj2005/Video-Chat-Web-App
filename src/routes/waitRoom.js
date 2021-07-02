@@ -6,6 +6,7 @@ import {
   faMicrophoneSlash,
   faVideoSlash,
 } from "@fortawesome/free-solid-svg-icons";
+import { GoogleLogin } from "react-google-login";
 import "./waitRoom.css";
 
 const videoConstraints = {
@@ -16,8 +17,12 @@ const videoConstraints = {
 const Room = (props) => {
   const userVideo = useRef();
   const roomID = props.match.params.roomID;
-  const username = props.location.state.name;
-  const userimg = props.location.state.img;
+  const name = props.location.state ? props.location.state.name : "User";
+  const img = props.location.state
+    ? props.location.state.img
+    : "https://image.flaticon.com/icons/png/512/149/149071.png";
+  const [username, setusername] = useState(name);
+  const [userimg, setuserimg] = useState(img);
   const [cam, setCam] = useState(true);
   const [mic, setMic] = useState(true);
 
@@ -91,10 +96,19 @@ const Room = (props) => {
     props.history.push(`/room/${roomID}`, {
       cam,
       mic,
+      username
     });
   };
   const toHome = () => {
     window.location.href = "/";
+  };
+
+  const responseGoogle = (response) => {
+    const name = response.Ys.Ve;
+    const img = response.profileObj.imageUrl;
+
+    setuserimg(img);
+    setusername(name);
   };
 
   return (
@@ -102,14 +116,19 @@ const Room = (props) => {
       <div className="videocontbox">
         <div className="taskbar">
           <div className="logo">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2zfAREgkmbvcbWq8CfWYnRK1TIQ2PD3QKcg&usqp=CAU" />
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2zfAREgkmbvcbWq8CfWYnRK1TIQ2PD3QKcg&usqp=CAU"
+              alt="logo"
+            />
           </div>
           <p className="title" onClick={toHome}>
             Ezy <span>Chat</span>
           </p>
           <div className="userDetails">
-            <p className='username'>{username}</p>
-            <div className='userimg'><img src={userimg}/></div>
+            <p className="username">{username}</p>
+            <div className="userimg">
+              <img src={userimg} alt="user image" />
+            </div>
           </div>
         </div>
         <div className="videobox">
@@ -125,6 +144,19 @@ const Room = (props) => {
         <div className="btnBox">
           <div className="joinbtn" onClick={join}>
             Join Now
+          </div>
+          <div
+            style={{
+              padding: "10px",
+              margin: "10px",
+            }}
+          >
+            <GoogleLogin
+              clientId="473889804939-kogm6iao0p44dedeo650vs98qavh3dmg.apps.googleusercontent.com"
+              onSuccess={responseGoogle}
+              isSignedIn={false}
+              buttonText="Login"
+            />
           </div>
         </div>
       </div>

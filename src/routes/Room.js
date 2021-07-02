@@ -57,6 +57,7 @@ const Room = (props) => {
   const userVideo = useRef();
   const peersRef = useRef([]);
   const roomID = props.match.params.roomID;
+  const [username, setUserName] = useState("");
   const [cam, setCam] = useState(true);
   const [mic, setMic] = useState(true);
   const msgEndRef = useRef();
@@ -67,7 +68,6 @@ const Room = (props) => {
     if (!props.location.state) {
       window.location.href = `/pre/${roomID}`;
     }
-
     socketRef.current = io.connect("/");
     navigator.mediaDevices
       .getUserMedia({ video: videoConstraints, audio: true })
@@ -83,7 +83,9 @@ const Room = (props) => {
           setCam(false);
         }
 
-        socketRef.current.emit("join room", roomID);
+        setUserName(props.location.state.username);
+
+        socketRef.current.emit("join room", roomID, username);
         socketRef.current.on("all users", (users) => {
           const peers = [];
           users.forEach((userID) => {
@@ -279,7 +281,7 @@ const Room = (props) => {
       ]);
 
       socketRef.current.emit("sending message", {
-        by: "User",
+        by: username,
         content: txt,
       });
 
@@ -297,7 +299,7 @@ const Room = (props) => {
       ]);
 
       socketRef.current.emit("sending message", {
-        by: "User",
+        by: username,
         content: txt,
       });
 

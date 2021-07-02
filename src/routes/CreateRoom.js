@@ -1,7 +1,6 @@
 import React from "react";
 import { v1 as uuid } from "uuid";
 import "./CreateRoom.css";
-import { GoogleLogin } from "react-google-login";
 
 const CreateRoom = (props) => {
   function create(name, img) {
@@ -12,14 +11,7 @@ const CreateRoom = (props) => {
     });
   }
 
-  const responseGoogle = (response) => {
-    const name = response.Ys.Ve;
-    const img = response.profileObj.imageUrl;
-    create(name, img);
-  };
-
   const responseGoogle1 = (response) => {
-    console.log(response);
     create("User", "https://image.flaticon.com/icons/png/512/149/149071.png");
   };
 
@@ -27,7 +19,7 @@ const CreateRoom = (props) => {
     <div className="container1">
       <div className="taskbar1">
         <div className="logo1">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2zfAREgkmbvcbWq8CfWYnRK1TIQ2PD3QKcg&usqp=CAU" />
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2zfAREgkmbvcbWq8CfWYnRK1TIQ2PD3QKcg&usqp=CAU" alt="logo" />
         </div>
         <p className="title">
           Ezy <span>Chat</span>
@@ -48,14 +40,8 @@ const CreateRoom = (props) => {
         </div>
       </div>
       <div className="btnCont">
-        <div className="btn">
-          <GoogleLogin
-            clientId="473889804939-kogm6iao0p44dedeo650vs98qavh3dmg.apps.googleusercontent.com"
-            onSuccess={responseGoogle}
-            onFailure={responseGoogle1}
-            isSignedIn={false}
-            buttonText="Create a Room Instantly"
-          />
+        <div className="btn" onClick={responseGoogle1}>
+          Create a Room Instantly
         </div>
       </div>
     </div>
