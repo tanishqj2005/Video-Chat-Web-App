@@ -35,7 +35,7 @@ const CreateRoom = (props) => {
         </div>
         <div className="right">
           <div className="disp">
-            <img src="https://www.payetteforward.com/wp-content/uploads/2019/05/what-is-video-calling.jpg" />
+            <img src="https://www.payetteforward.com/wp-content/uploads/2019/05/what-is-video-calling.jpg" alt="feature"/>
           </div>
         </div>
       </div>

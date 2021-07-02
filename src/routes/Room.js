@@ -32,7 +32,7 @@ const Video = (props) => {
     props.peer.on("stream", (stream) => {
       ref.current.srcObject = stream;
     });
-  }, []);
+  }, [props.peer]);
 
   return <video ref={ref} autoPlay playsInline className={props.classn} />;
 };
@@ -179,14 +179,6 @@ const Room = (props) => {
     return peer;
   }
 
-  const length = peers.length;
-  let classn = "";
-  if (length === 0) {
-    classn = "one";
-  } else {
-    classn = "two";
-  }
-
   const toggleCam = () => {
     const enabled = userVideo.current.srcObject.getVideoTracks()[0].enabled;
 
@@ -307,10 +299,24 @@ const Room = (props) => {
     }
   };
 
-  return (
-    <div>
-      <Container>
-        <div className="videos">
+  const length = peers.length;
+  let classn = "";
+  if (length === 0) {
+    classn = "one";
+  } else if (length === 1) {
+    classn = "two";
+  } else if (length === 2) {
+    classn = "three";
+  } else {
+    classn = "four";
+  }
+
+  let allvideos = null;
+
+  if (classn === "one") {
+    allvideos = (
+      <div className="allvideos">
+        <div className="rowvid">
           <video
             ref={userVideo}
             autoPlay
@@ -318,10 +324,55 @@ const Room = (props) => {
             muted
             className={classn}
           />
-          {peers.map((peer) => {
-            return <Video key={peer.peerID} peer={peer.peer} classn={classn} />;
-          })}
         </div>
+      </div>
+    );
+  } else if (classn === "two") {
+    allvideos = (
+      <div className="allvideos">
+        <div className="rowvid">
+          <video
+            ref={userVideo}
+            autoPlay
+            playsInline
+            muted
+            className={classn}
+          />
+          <Video key={peers[0].peerID} peer={peers[0].peer} classn={classn} />;
+        </div>
+      </div>
+    );
+  } else if (classn === "three") {
+    allvideos = (
+      <div className="allvideos">
+        <div className="rowvid">
+          <video ref={userVideo} autoPlay playsInline muted className={"two"} />
+          <Video key={peers[0].peerID} peer={peers[0].peer} classn={"two"} />;
+        </div>
+        <div className="rowvid">
+          <Video key={peers[1].peerID} peer={peers[1].peer} classn={"two"} />;
+        </div>
+      </div>
+    );
+  } else {
+    allvideos = (
+      <div className="allvideos">
+        <div className="rowvid">
+          <video ref={userVideo} autoPlay playsInline muted className={"two"} />
+          <Video key={peers[0].peerID} peer={peers[0].peer} classn={"two"} />;
+        </div>
+        <div className="rowvid">
+          <Video key={peers[1].peerID} peer={peers[1].peer} classn={"two"} />;
+          <Video key={peers[2].peerID} peer={peers[2].peer} classn={"two"} />;
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <Container>
+        <div className="videos">{allvideos}</div>
         <div className="chatbox">
           <div class="chatbtitle">In-Call Messages</div>
           <div className="chatbinfo">

@@ -127,7 +127,7 @@ const Room = (props) => {
           <div className="userDetails">
             <p className="username">{username}</p>
             <div className="userimg">
-              <img src={userimg} alt="user image" />
+              <img src={userimg} alt="user pic" />
             </div>
           </div>
         </div>
