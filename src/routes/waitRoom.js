@@ -23,6 +23,8 @@ const Room = (props) => {
     : "https://image.flaticon.com/icons/png/512/149/149071.png";
   const [username, setusername] = useState(name);
   const [userimg, setuserimg] = useState(img);
+  const [allusers, setallusers] = useState(0);
+  const [dis, setdis] = useState(true);
   const [cam, setCam] = useState(true);
   const [mic, setMic] = useState(true);
 
@@ -32,6 +34,22 @@ const Room = (props) => {
       .then((stream) => {
         userVideo.current.srcObject = stream;
       });
+
+    setdis(false);
+  }, []);
+  useEffect(() => {
+    async function fetchData() {
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ roomID }),
+      };
+      const response = await fetch("/getpeople", requestOptions);
+      const data = await response.json();
+      setallusers(data.number);
+    }
+
+    fetchData();
   }, []);
 
   const toggleCam = () => {
@@ -92,11 +110,16 @@ const Room = (props) => {
     );
   }
 
+  if (dis) {
+    m = null;
+    vid = null;
+  }
+
   const join = () => {
     props.history.push(`/room/${roomID}`, {
       cam,
       mic,
-      username
+      username,
     });
   };
   const toHome = () => {
@@ -110,6 +133,17 @@ const Room = (props) => {
     setuserimg(img);
     setusername(name);
   };
+
+  let ans = "No one else is here yet";
+
+  if (allusers > 0) {
+    ans = "";
+    if (allusers === 1) {
+      ans = "1 person is in this call";
+    } else {
+      ans = allusers + " people are in this call";
+    }
+  }
 
   return (
     <div className="container">
@@ -141,6 +175,7 @@ const Room = (props) => {
       </div>
       <div className="joinbox">
         <p>Ready to Join?</p>
+        <h4>{ans}</h4>
         <div className="btnBox">
           <div className="joinbtn" onClick={join}>
             Join Now

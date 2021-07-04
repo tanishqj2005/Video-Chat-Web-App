@@ -85,7 +85,11 @@ const Room = (props) => {
 
         setUserName(props.location.state.username);
 
-        socketRef.current.emit("join room", roomID, username);
+        socketRef.current.emit(
+          "join room",
+          roomID,
+          props.location.state.username
+        );
         socketRef.current.on("all users", (users) => {
           const peers = [];
           users.forEach((userID) => {
