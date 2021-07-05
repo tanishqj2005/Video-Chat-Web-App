@@ -33,9 +33,9 @@ const Room = (props) => {
       .getUserMedia({ video: videoConstraints, audio: true })
       .then((stream) => {
         userVideo.current.srcObject = stream;
+        setdis(false);
       });
 
-    setdis(false);
   }, []);
   useEffect(() => {
     async function fetchData() {
